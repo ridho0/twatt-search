@@ -16,11 +16,20 @@ var oauth = new OAuth.OAuth(
 module.exports = {
   search: function(req, res){
     oauth.get(
-      'https://api.twitter.com/1.1/search/tweets.json?q=%23'+req.params.search,
+      'https://api.twitter.com/1.1/search/tweets.json?q=%23'+req.params.search+'&count=5',
       process.env.Access_Token, //test user token
       process.env.Access_Token_Secret, //test user secret
       function (e, data){
-        e ? res.json({e}) : res.json(data)
+        e ? res.json({e}) : res.send(data)
+      });
+  },
+  timeline: function(req, res){
+    oauth.get(
+      'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='+req.params.screen_name+'&count=5',
+      process.env.Access_Token, //test user token
+      process.env.Access_Token_Secret, //test user secret
+      function (e, data){
+        e ? res.json({e}) : res.send(data)
       });
   }
 }

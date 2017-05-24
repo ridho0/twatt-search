@@ -5,5 +5,6 @@ route.get('/', function(req, res){
   res.send("hai")
 })
 route.get('/search/:search', twitter_controller.search)
+route.get('/recent/:screen_name', twitter_controller.recent)
 
 module.exports = route
